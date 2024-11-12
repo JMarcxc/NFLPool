@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Entry</title>
+</head>
+<body>
+    <h1>Enter Your Picks</h1>
+    <form method="post">
+        <label for="full_name">Full Name:</label>
+        <input type="text" name="full_name" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label for="pool_nickname">Pool Nickname:</label>
+        <input type="text" name="pool_nickname" required><br>
+
+        <label for="playing_status">
+            <input type="checkbox" name="playing_status">
+            Playing for money
+        </label><br>
+
+        <h2>Game Picks</h2>
+        {% for game in games %}
+            <p>
+                <strong>{{ game.home_team }} ({{ game.spread }}) vs. {{ game.away_team }}</strong><br>
+                <label>
+                    <input type="radio" name="pick_{{ loop.index }}" value="{{ game.home_team }}" required>
+                    {{ game.home_team }}
+                </label>
+                <label>
+                    <input type="radio" name="pick_{{ loop.index }}" value="{{ game.away_team }}">
+                    {{ game.away_team }}
+                </label>
+            </p>
+        {% endfor %}
+
+        <button type="submit">Submit Picks</button>
+    </form>
+</body>
+</html>
